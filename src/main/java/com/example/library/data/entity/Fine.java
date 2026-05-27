@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 @Table(name = "fines")
 public class Fine {
 
+    private static final BigDecimal DEFAULT_DAILY_FINE_RATE = BigDecimal.valueOf(5000L);
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fineId;
@@ -52,7 +54,7 @@ public class Fine {
 
     public BigDecimal calculateFine(long overdueDays) {
         // TODO: Replace placeholder calculation with configurable business rules.
-        return BigDecimal.valueOf(overdueDays).multiply(BigDecimal.valueOf(5000L));
+        return BigDecimal.valueOf(overdueDays).multiply(DEFAULT_DAILY_FINE_RATE);
     }
 
     public void markAsPaid() {

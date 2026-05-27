@@ -33,7 +33,13 @@ public class PaymentService {
         if (fine.getStatus() != FineStatus.UNPAID) {
             throw new PaymentFailedException("Fine is not available for payment.");
         }
-        if (requestDTO.getAmount() == null || fine.getAmount() == null || fine.getAmount().compareTo(requestDTO.getAmount()) != 0) {
+        if (requestDTO.getAmount() == null) {
+            throw new PaymentFailedException("Payment amount is required.");
+        }
+        if (fine.getAmount() == null) {
+            throw new PaymentFailedException("Fine amount is not available for payment.");
+        }
+        if (fine.getAmount().compareTo(requestDTO.getAmount()) != 0) {
             throw new PaymentFailedException("Payment amount must match the fine amount.");
         }
 

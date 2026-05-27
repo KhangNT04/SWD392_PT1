@@ -90,7 +90,7 @@ public class MemberService {
         UserAccount account = new UserAccount();
         account.setUsername(requestDTO.getUsername());
         account.setEmail(requestDTO.getEmail());
-        account.setPasswordHash("TODO_SET_PASSWORD_HASH");
+        // TODO: Set a hashed password when account onboarding is implemented.
         account.setRole(UserRole.MEMBER);
         account.setStatus(AccountStatus.ACTIVE);
         return account;

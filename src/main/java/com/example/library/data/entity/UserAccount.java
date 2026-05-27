@@ -59,8 +59,7 @@ public class UserAccount {
     }
 
     public boolean login(String username, String password) {
-        // TODO: Replace placeholder authentication logic.
-        return this.username != null && this.username.equals(username) && password != null && !password.isBlank();
+        throw new UnsupportedOperationException("Login is not implemented in this template.");
     }
 
     public void logout() {
@@ -68,8 +67,7 @@ public class UserAccount {
     }
 
     public void changePassword(String oldPassword, String newPassword) {
-        // TODO: Verify old password and hash the new password.
-        this.passwordHash = newPassword;
+        throw new UnsupportedOperationException("Password changes are not implemented in this template.");
     }
 
     public boolean isActive() {

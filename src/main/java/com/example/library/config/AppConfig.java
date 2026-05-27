@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
+    private static final BigDecimal DEFAULT_DAILY_FINE_RATE = BigDecimal.valueOf(5000L);
+
     @Bean
     public BorrowingPolicy borrowingPolicy() {
         return (Member member, Book book) -> {
@@ -29,6 +31,6 @@ public class AppConfig {
 
     @Bean
     public FineCalculationRule fineCalculationRule() {
-        return overdueDays -> BigDecimal.valueOf(overdueDays).multiply(BigDecimal.valueOf(5000L));
+        return overdueDays -> BigDecimal.valueOf(overdueDays).multiply(DEFAULT_DAILY_FINE_RATE);
     }
 }

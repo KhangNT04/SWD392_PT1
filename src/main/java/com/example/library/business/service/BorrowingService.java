@@ -23,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BorrowingService {
 
+    private static final long DEFAULT_BORROW_DAYS = 14L;
+
     private final BorrowingRepository borrowingRepository;
     private final MemberRepository memberRepository;
     private final BookRepository bookRepository;
@@ -69,7 +71,7 @@ public class BorrowingService {
 
         record.setStatus(BorrowingStatus.BORROWED);
         record.setBorrowDate(LocalDate.now());
-        record.setDueDate(LocalDate.now().plusDays(14));
+        record.setDueDate(LocalDate.now().plusDays(DEFAULT_BORROW_DAYS));
         record.getBook().setStatus(BookStatus.BORROWED);
         bookRepository.save(record.getBook());
         return BorrowingMapper.toDto(borrowingRepository.save(record));
