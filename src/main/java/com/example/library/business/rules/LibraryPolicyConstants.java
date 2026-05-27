@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public final class LibraryPolicyConstants {
 
     public static final long DEFAULT_BORROW_DAYS = 14L;
+    // Template fine rate: 5,000 VND per overdue day.
     public static final BigDecimal DEFAULT_DAILY_FINE_RATE = BigDecimal.valueOf(5000L);
 
     private LibraryPolicyConstants() {
