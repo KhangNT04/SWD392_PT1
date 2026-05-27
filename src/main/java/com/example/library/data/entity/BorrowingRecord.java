@@ -1,5 +1,6 @@
 package com.example.library.data.entity;
 
+import com.example.library.business.rules.LibraryPolicyConstants;
 import com.example.library.data.enums.BookStatus;
 import com.example.library.data.enums.BorrowingStatus;
 import jakarta.persistence.Entity;
@@ -21,8 +22,6 @@ import java.time.temporal.ChronoUnit;
 @Entity
 @Table(name = "borrowing_records")
 public class BorrowingRecord {
-
-    private static final long DEFAULT_BORROW_DAYS = 14L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,7 +78,7 @@ public class BorrowingRecord {
     public void markAsBorrowed() {
         this.status = BorrowingStatus.BORROWED;
         this.borrowDate = LocalDate.now();
-        this.dueDate = borrowDate.plusDays(DEFAULT_BORROW_DAYS);
+        this.dueDate = borrowDate.plusDays(LibraryPolicyConstants.DEFAULT_BORROW_DAYS);
         if (book != null) {
             book.updateStatus(BookStatus.BORROWED);
         }

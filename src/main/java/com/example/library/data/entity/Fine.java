@@ -1,5 +1,6 @@
 package com.example.library.data.entity;
 
+import com.example.library.business.rules.LibraryPolicyConstants;
 import com.example.library.data.enums.FineStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,8 +18,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "fines")
 public class Fine {
-
-    private static final BigDecimal DEFAULT_DAILY_FINE_RATE = BigDecimal.valueOf(5000L);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +53,7 @@ public class Fine {
 
     public BigDecimal calculateFine(long overdueDays) {
         // TODO: Replace placeholder calculation with configurable business rules.
-        return BigDecimal.valueOf(overdueDays).multiply(DEFAULT_DAILY_FINE_RATE);
+        return LibraryPolicyConstants.DEFAULT_DAILY_FINE_RATE.multiply(BigDecimal.valueOf(overdueDays));
     }
 
     public void markAsPaid() {

@@ -4,6 +4,7 @@ import com.example.library.business.exception.BookUnavailableException;
 import com.example.library.business.exception.InvalidBorrowingRequestException;
 import com.example.library.business.exception.ResourceNotFoundException;
 import com.example.library.business.rules.BorrowingPolicy;
+import com.example.library.business.rules.LibraryPolicyConstants;
 import com.example.library.data.entity.Book;
 import com.example.library.data.entity.BorrowingRecord;
 import com.example.library.data.entity.Member;
@@ -22,8 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BorrowingService {
-
-    private static final long DEFAULT_BORROW_DAYS = 14L;
 
     private final BorrowingRepository borrowingRepository;
     private final MemberRepository memberRepository;
@@ -71,7 +70,7 @@ public class BorrowingService {
 
         record.setStatus(BorrowingStatus.BORROWED);
         record.setBorrowDate(LocalDate.now());
-        record.setDueDate(LocalDate.now().plusDays(DEFAULT_BORROW_DAYS));
+        record.setDueDate(LocalDate.now().plusDays(LibraryPolicyConstants.DEFAULT_BORROW_DAYS));
         record.getBook().setStatus(BookStatus.BORROWED);
         bookRepository.save(record.getBook());
         return BorrowingMapper.toDto(borrowingRepository.save(record));
